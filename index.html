@@ -9,17 +9,16 @@
 <body>
 	<div><span id="demo"></span>---<span id="omed"></span></div>
 	
-    <script>
-				 
-        //Data from: https://data.giss.nasa.gov/gistemp/
+	<script>				 
+ 		//Data from: https://data.giss.nasa.gov/gistemp/
         //Mean from: https://earthobservatory.nasa.gov/world-of-change/global-temperatures
         getData();
 
         async function getData() {
             const response = await fetch('dataTable.txt');
             const data = await response.text();
-						const table = data.split('\n').slice(2,60);
-         		table.forEach(row => {								
+			const table = data.split('\n').slice(2,60);
+         	table.forEach(row => {								
                 const columns = row.split(',');							
                 const lat = columns[0].split(' ').slice(-1);
                 const lng = columns[1].split(' ').slice(1,2);
