@@ -1,33 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<meta http-equiv="X-UA_Compatible" content="ie-edge"/>
-<title>Fetch and Parse data</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta http-equiv="X-UA_Compatible" content="ie-edge"/>
+	<title>Fetch and Parse data</title>
 </head>
 <body>
-<div><span id="demo"></span>---<span id="omed"></span></div>
+	<div><span id="demo"></span>---<span id="omed"></span></div>
 	
 <script>				 
-//Data from: https://data.giss.nasa.gov/gistemp/
-//Mean from: https://earthobservatory.nasa.gov/world-of-change/global-temperatures
-getData();
+	//Data from: https://data.giss.nasa.gov/gistemp/
+	//Mean from: https://earthobservatory.nasa.gov/world-of-change/global-temperatures
+	getData();
 
-async function getData() {
-const response = await fetch('dataTable.txt');
-const data = await response.text();
-const table = data.split('\n').slice(2,60);
-table.forEach(row => {								
-const columns = row.split(',');							
-const lat = columns[0].split(' ').slice(-1);
-const lng = columns[1].split(' ').slice(1,2);
-console.log("lat",lat);
-console.log("lng",lng);
-document.getElementById('demo').textContent = parseFloat(lat).toFixed(2);
-document.getElementById('omed').textContent = parseFloat(lng).toFixed(2);
-});
-}
+	async function getData() {
+		const response = await fetch('dataTable.txt');
+		const data = await response.text();
+		
+		const table = data.split('\n').slice(2,60);
+		table.forEach(row => {								
+			const columns = row.split(',');							
+			const lat = columns[0].split(' ').slice(-1);
+			const lng = columns[1].split(' ').slice(1,2);
+			console.log("lat",lat);
+			console.log("lng",lng);
+			document.getElementById('demo').textContent = parseFloat(lat).toFixed(2);
+			document.getElementById('omed').textContent = parseFloat(lng).toFixed(2);
+		});
+	}
 </script>
 </body>
 </html>
