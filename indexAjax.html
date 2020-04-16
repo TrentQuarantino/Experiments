@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA_Compatible" content="ie-edge"/>
+    <title>Fetch data with Ajax from txt</title>
+</head>
+<body>
+	<div><span id="demo"></span> *** <span id="omed"></span></div>
+	
+    <script>
+		function loadDoc() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("GET", "dataTable.txt", false);
+            xhttp.send();
+            //document.getElementById("demo").innerHTML = xhttp.responseText;*/ 
+            const dati = (xhttp.responseText).split('\n').slice(2,20);
+            return dati; 
+        }
+        var datiwa = loadDoc();		 
+        console.log(datiwa);
+        var i = 0;
+        
+        function myTimer(table) {
+            if (i < table.length) {
+                const columns = table[i].split(',');
+                const lat = columns[0].split(' ').slice(-1);
+                const lng = columns[1].split(' ').slice(1,2);	
+                document.getElementById('demo').innerHTML = lat ;//table[i];
+                document.getElementById('omed').innerHTML = lng + " " + i;//table[i];
+                i++;
+            } else {
+                clearInterval(myvar);
+            }
+        } 		
+        
+        var myvar = setInterval(myTimer, 3000, datiwa);
+        
+    </script>
+</body>
+</html>
